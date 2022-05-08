@@ -1,0 +1,12 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build:dev": "cd client && npm i --silent && cd ../api && npm i --silent && cd ../dashboard && npm i --silent",
+    "build:prod": "cd client && npm i --silent npm run build:ssr  && cd ../api && npm i --silent && cd ../dashboard && npm i --silent",
+    "start:dev": "npm run build:dev && cd client && npm run start"
+  },
+  "keywords": [],
+  "author": ""
+}

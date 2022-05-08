@@ -1,0 +1,48 @@
+version: "3.9"
+networks:
+  blog:
+volumes:
+  api:
+  client:
+  db:
+services:
+  api:
+    container_name: api_container
+    build:
+      context: .
+      dockerfile: api/Dockerfile-${env:-dev}
+    volumes:
+      - ./api:/app/api
+    #      - /usr/src/api/node_modules
+    ports:
+      - "81:3000"
+    depends_on:
+      - db
+    networks:
+      - blog
+  client:
+    container_name: client_container
+    build:
+      context: .
+      dockerfile: client/Dockerfile-${env:-dev}
+    volumes:
+      - ./client:/app/client
+    #      - /usr/src/client/node_modules
+    ports:
+      - "80:4200"
+    depends_on:
+      - db
+    networks:
+      - blog
+  db:
+    image: mongo
+    container_name: db_container
+    networks:
+      - blog
+    volumes:
+      - db:/data/db
+    ports:
+      - "27017:27017"
+#    environment   :
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: example

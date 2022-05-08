@@ -1,0 +1,6 @@
+[submodule "api"]
+	path = api
+	url = ../../kaan35/api.git
+[submodule "client"]
+	path = client
+	url = ../../kaan35/client.git
